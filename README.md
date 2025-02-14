@@ -1,5 +1,3 @@
-### **README for Peer-to-Peer Book Exchange Platform**  
-
 ## **📚 Peer-to-Peer Book Exchange Platform POC**  
 
 A **community-driven** web platform designed to facilitate **book exchange** through an AI-enhanced recommendation system. Users can **list books, search, exchange, donate, and participate in discussions** while earning rewards.  
