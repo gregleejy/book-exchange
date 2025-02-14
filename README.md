@@ -73,6 +73,6 @@ git clone https://github.com/gregleejy/book-exchange-platform.git
 ---
 
 ## **📩 Contact**
-For any issues, reach out via [GitHub Issues](https://github.com/gregleejy/book-exchange-platform/issues).
+For any issues, reach out via [GitHub Issues](https://github.com/gregleejy/book-exchange/issues).
 
 ---
