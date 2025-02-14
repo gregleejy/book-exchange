@@ -50,7 +50,7 @@ The platform should now be accessible via **localhost** in your web browser.
 ## **⚙️ Technologies Used**
 - **Backend**: Flask (for managing book data and AI recommendations)
 - **Frontend**: Streamlit (for UI and user interactions)
-- **Database**: JSON / SQLite (for book listings, user preferences)
+- **Database**: Currently using in-memory data structures for quick prototyping (SQLite or PostgreSQL can be added for production)
 - **AI Features**:  
   - **SpaCy NER** (for entity extraction in book recommendations)  
   - **Fuzzy Matching** (for book title search)
@@ -74,24 +74,5 @@ git clone https://github.com/gregleejy/book-exchange-platform.git
 
 ## **📩 Contact**
 For any issues, reach out via [GitHub Issues](https://github.com/gregleejy/book-exchange-platform/issues).
-
----
-
-### **requirements.txt**
-Here’s the list of all libraries used in your project:
-```
-flask
-streamlit
-requests
-pandas
-st-aggrid
-fuzzywuzzy
-spacy
-```
-
-You can save this as **`requirements.txt`** and install it with:
-```bash
-pip install -r requirements.txt
-```
 
 ---
