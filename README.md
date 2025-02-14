@@ -41,6 +41,7 @@ The platform should now be accessible via **localhost** in your web browser.
 📂 Peer-to-Peer Book Exchange Platform
 ├── 📜 app.py          # Backend Flask API for book management and AI recommendations
 ├── 📜 ui.py           # Streamlit frontend for user interaction
+├── 📜 books_dataset.py           # Streamlit frontend for user interaction
 ├── 📜 requirements.txt # List of required Python libraries
 └── 📜 README.md       # Project documentation
 ```
