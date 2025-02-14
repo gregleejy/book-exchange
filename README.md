@@ -68,7 +68,7 @@ The platform should now be accessible via **localhost** in your web browser.
 ## **🤝 Contributing**
 Feel free to contribute! Clone the repo and submit a pull request.  
 ```bash
-git clone https://github.com/gregleejy/book-exchange-platform.git
+git clone https://github.com/gregleejy/book-exchange.git
 ```
 
 ---
