@@ -56,7 +56,7 @@ This project leverages **Natural Language Processing (NLP) models** and **Machin
 ```sh
 # 1️⃣ Clone the Repository
 git clone https://github.com/gregleejy/book-exchange-platform.git
-cd book-exchange-platform
+cd book-exchange
 
 # 2️⃣ Install Dependencies
 pip install -r requirements.txt
@@ -250,7 +250,7 @@ POST /market/add
 
 ## 🏆 Contributors
 
-- **👨‍💻 Gregory Lee (@gregleejy)** - **AI & Backend**
+- **👨‍💻 Greg Lee (@gregleejy)** - **AI & Backend**
 - **🛠 Open for Contributions!** 🚀 
 
 ---
