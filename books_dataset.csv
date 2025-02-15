@@ -1,0 +1,101 @@
+title,author,genre,price,description
+The Lord of the Rings,Unknown Author,Fantasy,66,A deep dive into Fantasy.
+A Game of Thrones,Unknown Author,Fantasy,71,A deep dive into Fantasy.
+Percy Jackson,Unknown Author,Fantasy,16,A deep dive into Fantasy.
+The Name of the Wind,Unknown Author,Fantasy,19,A deep dive into Fantasy.
+Mistborn,Unknown Author,Fantasy,59,A deep dive into Fantasy.
+The Wheel of Time,Unknown Author,Fantasy,84,A deep dive into Fantasy.
+Eragon,Unknown Author,Fantasy,43,A deep dive into Fantasy.
+His Dark Materials,Unknown Author,Fantasy,68,A deep dive into Fantasy.
+The Last Unicorn,Unknown Author,Fantasy,19,A deep dive into Fantasy.
+The Once and Future King,Unknown Author,Fantasy,97,A deep dive into Fantasy.
+Neuromancer,Unknown Author,Science Fiction,28,A deep dive into Science Fiction.
+The Martian,Unknown Author,Science Fiction,59,A deep dive into Science Fiction.
+Ender's Game,Unknown Author,Science Fiction,30,A deep dive into Science Fiction.
+Hyperion,Unknown Author,Science Fiction,52,A deep dive into Science Fiction.
+Snow Crash,Unknown Author,Science Fiction,73,A deep dive into Science Fiction.
+The Three-Body Problem,Unknown Author,Science Fiction,63,A deep dive into Science Fiction.
+Foundation,Unknown Author,Science Fiction,53,A deep dive into Science Fiction.
+Brave New World,Unknown Author,Science Fiction,47,A deep dive into Science Fiction.
+Do Androids Dream of Electric Sheep?,Unknown Author,Science Fiction,91,A deep dive into Science Fiction.
+The Left Hand of Darkness,Unknown Author,Science Fiction,54,A deep dive into Science Fiction.
+Artificial Intelligence: A Guide,Unknown Author,Technology,20,A deep dive into Technology.
+Deep Learning with Python,Unknown Author,Technology,20,A deep dive into Technology.
+Python Machine Learning,Unknown Author,Technology,43,A deep dive into Technology.
+The Algorithm Design Manual,Unknown Author,Technology,31,A deep dive into Technology.
+Hacking: The Art of Exploitation,Unknown Author,Technology,93,A deep dive into Technology.
+Clean Code,Unknown Author,Technology,28,A deep dive into Technology.
+Software Engineering,Unknown Author,Technology,68,A deep dive into Technology.
+Grokking Algorithms,Unknown Author,Technology,60,A deep dive into Technology.
+The Pragmatic Programmer,Unknown Author,Technology,86,A deep dive into Technology.
+The Mythical Man-Month,Unknown Author,Technology,53,A deep dive into Technology.
+To Kill a Mockingbird,Unknown Author,Fiction,87,A deep dive into Fiction.
+The Catcher in the Rye,Unknown Author,Fiction,50,A deep dive into Fiction.
+One Hundred Years of Solitude,Unknown Author,Fiction,29,A deep dive into Fiction.
+Pride and Prejudice,Unknown Author,Fiction,37,A deep dive into Fiction.
+Moby-Dick,Unknown Author,Fiction,21,A deep dive into Fiction.
+Crime and Punishment,Unknown Author,Fiction,32,A deep dive into Fiction.
+Wuthering Heights,Unknown Author,Fiction,76,A deep dive into Fiction.
+Jane Eyre,Unknown Author,Fiction,53,A deep dive into Fiction.
+Anna Karenina,Unknown Author,Fiction,53,A deep dive into Fiction.
+The Brothers Karamazov,Unknown Author,Fiction,80,A deep dive into Fiction.
+Cosmos,Unknown Author,Science,86,A deep dive into Science.
+A Brief History of Time,Unknown Author,Science,29,A deep dive into Science.
+The Selfish Gene,Unknown Author,Science,25,A deep dive into Science.
+The Elegant Universe,Unknown Author,Science,41,A deep dive into Science.
+The Gene: An Intimate History,Unknown Author,Science,40,A deep dive into Science.
+Why We Sleep,Unknown Author,Science,41,A deep dive into Science.
+Astrophysics for People in a Hurry,Unknown Author,Science,35,A deep dive into Science.
+The Sixth Extinction,Unknown Author,Science,42,A deep dive into Science.
+Sapiens,Unknown Author,Science,84,A deep dive into Science.
+The Immortal Life of Henrietta Lacks,Unknown Author,Science,62,A deep dive into Science.
+"Guns, Germs, and Steel",Unknown Author,History,87,A deep dive into History.
+The Silk Roads,Unknown Author,History,62,A deep dive into History.
+A People's History of the United States,Unknown Author,History,33,A deep dive into History.
+SPQR: A History of Ancient Rome,Unknown Author,History,53,A deep dive into History.
+The Wright Brothers,Unknown Author,History,88,A deep dive into History.
+Team of Rivals,Unknown Author,History,31,A deep dive into History.
+The History of the Peloponnesian War,Unknown Author,History,41,A deep dive into History.
+The Crusades: The Authoritative History,Unknown Author,History,72,A deep dive into History.
+1776,Unknown Author,History,35,A deep dive into History.
+The Diary of Anne Frank,Unknown Author,History,48,A deep dive into History.
+Atomic Habits,Unknown Author,Self-Help,20,A deep dive into Self-Help.
+The Power of Now,Unknown Author,Self-Help,18,A deep dive into Self-Help.
+The Four Agreements,Unknown Author,Self-Help,28,A deep dive into Self-Help.
+Daring Greatly,Unknown Author,Self-Help,38,A deep dive into Self-Help.
+Mindset: The New Psychology of Success,Unknown Author,Self-Help,92,A deep dive into Self-Help.
+The 5 AM Club,Unknown Author,Self-Help,98,A deep dive into Self-Help.
+Awaken the Giant Within,Unknown Author,Self-Help,66,A deep dive into Self-Help.
+The 7 Habits of Highly Effective People,Unknown Author,Self-Help,46,A deep dive into Self-Help.
+The Subtle Art of Not Giving a F*ck,Unknown Author,Self-Help,85,A deep dive into Self-Help.
+How to Win Friends and Influence People,Unknown Author,Self-Help,64,A deep dive into Self-Help.
+The Lean Startup,Unknown Author,Business,79,A deep dive into Business.
+Zero to One,Unknown Author,Business,46,A deep dive into Business.
+The Hard Thing About Hard Things,Unknown Author,Business,77,A deep dive into Business.
+Good to Great,Unknown Author,Business,96,A deep dive into Business.
+The Art of War for Managers,Unknown Author,Business,66,A deep dive into Business.
+Blue Ocean Strategy,Unknown Author,Business,98,A deep dive into Business.
+The Innovator's Dilemma,Unknown Author,Business,49,A deep dive into Business.
+Start with Why,Unknown Author,Business,17,A deep dive into Business.
+Measure What Matters,Unknown Author,Business,32,A deep dive into Business.
+The $100 Startup,Unknown Author,Business,67,A deep dive into Business.
+"Thinking, Fast and Slow",Unknown Author,Psychology,37,A deep dive into Psychology.
+The Psychology of Money,Unknown Author,Psychology,66,A deep dive into Psychology.
+Predictably Irrational,Unknown Author,Psychology,42,A deep dive into Psychology.
+Influence: The Psychology of Persuasion,Unknown Author,Psychology,70,A deep dive into Psychology.
+Quiet: The Power of Introverts,Unknown Author,Psychology,38,A deep dive into Psychology.
+Grit: The Power of Passion and Perseverance,Unknown Author,Psychology,83,A deep dive into Psychology.
+The Lucifer Effect,Unknown Author,Psychology,73,A deep dive into Psychology.
+The Social Animal,Unknown Author,Psychology,37,A deep dive into Psychology.
+Blink,Unknown Author,Psychology,75,A deep dive into Psychology.
+Man's Search for Meaning,Unknown Author,Psychology,41,A deep dive into Psychology.
+Rich Dad Poor Dad,Unknown Author,Finance,24,A deep dive into Finance.
+The Intelligent Investor,Unknown Author,Finance,49,A deep dive into Finance.
+The Millionaire Next Door,Unknown Author,Finance,71,A deep dive into Finance.
+I Will Teach You to Be Rich,Unknown Author,Finance,50,A deep dive into Finance.
+The Little Book of Common Sense Investing,Unknown Author,Finance,92,A deep dive into Finance.
+The Psychology of Money,Unknown Author,Finance,61,A deep dive into Finance.
+Your Money or Your Life,Unknown Author,Finance,48,A deep dive into Finance.
+One Up On Wall Street,Unknown Author,Finance,38,A deep dive into Finance.
+The Warren Buffett Way,Unknown Author,Finance,67,A deep dive into Finance.
+Financial Freedom,Unknown Author,Finance,58,A deep dive into Finance.

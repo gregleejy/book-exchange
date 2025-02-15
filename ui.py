@@ -3,6 +3,7 @@ import requests
 import pandas as pd
 from st_aggrid import AgGrid
 from fuzzywuzzy import process
+from app import friend_data, shop_items, study_groups, leaderboard_data
 
 st.set_page_config(page_title="Book Exchange", layout="wide")
 
@@ -53,29 +54,33 @@ else:
             st.header("📖 Recommended Books for You")
             response = requests.get(f"http://127.0.0.1:5000/match_books?username={st.session_state['username']}")
             if response.status_code == 200:
-                matched_books = response.json()["matched_books"]
-                if matched_books:
-                    st.markdown("### 📚 Top 5 Recommended Books")
-                    cols = st.columns(5, gap="medium")
-                    
-                    for i, book in enumerate(matched_books[:5]):
-                        with cols[i]:
-                            st.markdown(
-                                f"""
-                                <div style='text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f9fa; width: 100%;'>
-                                    <h4 style='text-align: center; font-size: 18px; margin-bottom: 5px;'>{book['title']}</h4>
-                                    <p style='text-align: center; font-size: 16px; font-weight: bold; color: green; margin-bottom: 5px;'>💲 {book['price']}</p>
-                                    <p style='text-align: center; font-size: 14px; color: #6c757d; margin-bottom: 10px;'>{book['description']}</p>
-                                """,
-                                unsafe_allow_html=True
-                            )
-                            if st.button(f"Buy {book['title']}", key=f"buy_{i}"):
-                                st.session_state["purchased_books"].add(book['title'])
-                                st.success(f"✅ Purchased {book['title']}!")
-                            st.markdown("</div>", unsafe_allow_html=True)
-                else:
-                    st.warning("⚠️ No recommendations found. Try searching for a book or chatting with Scott!")
-            
+                matched_books = response.json().get("matched_books", [])
+                if not matched_books:
+                    st.warning("⚠️ No book recommendations found. Try updating your preferences or asking Scott!")
+            else:
+                matched_books = []
+                st.error("⚠️ Error fetching recommendations. Please try again later.")
+            if matched_books:
+                st.markdown("### 📚 Top 5 Recommended Books")
+                cols = st.columns(5, gap="medium")
+                
+                for i, book in enumerate(matched_books[:5]):
+                    with cols[i]:
+                        st.markdown(
+                            f"""
+                            <div style='text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f9fa; width: 100%;'>
+                                <h4 style='text-align: center; font-size: 18px; margin-bottom: 5px;'>{book['title']}</h4>
+                                <p style='text-align: center; font-size: 16px; font-weight: bold; color: green; margin-bottom: 5px;'>💲 {book.get('price', 'N/A')}</p>
+                                <p style='text-align: center; font-size: 14px; color: #6c757d; margin-bottom: 10px;'>{book.get('description', 'No description available')}</p>
+                            """,
+                            unsafe_allow_html=True
+                        )
+                        if st.button(f"Buy {book['title']}", key=f"buy_{i}"):
+                            st.session_state["purchased_books"].add(book['title'])
+                            st.success(f"✅ Purchased {book['title']}!")
+                        st.markdown("</div>", unsafe_allow_html=True)
+            else:
+                st.warning("⚠️ No recommendations found. Try searching for a book or chatting with Scott!")                    
             st.subheader("🔍 Search for a Book")
             search_query = st.text_input("Enter book title:")
             if st.button("Search"):
@@ -89,7 +94,6 @@ else:
                         st.write(book_result['description'])
                     else:
                         st.warning("⚠️ No matching book found. Try chatting with Scott!")
-
             if st.button("🤖 Ask Scott for Help", key="ask_scott_redirect"):
                 st.session_state["active_tab"] = "Scott Rizzgerald Chatbot"
                 st.rerun()  # Ensures immediate redirection
@@ -134,20 +138,6 @@ else:
         if tab == "Shop":
             st.header("🛍️ Redeem Rewards with Points")
 
-            # Static shop items available for redemption
-            shop_items = [
-                {"item": "🎟️ Free Ticket to Art Science Museum", "points": 50},
-                {"item": "🎫 20% Off Popular/Books Kinokuniya Voucher", "points": 60},
-                {"item": "📖 Exclusive Collector's Edition Bookmarks", "points": 30},
-                {"item": "📚 $10 Book Voucher for Local Bookstores", "points": 70},
-                {"item": "☕ Free Coffee at Starbucks (Perfect for Bookworms!)", "points": 40},
-                {"item": "📦 Mystery Book Box (Surprise Book Inside)", "points": 100},
-                {"item": "🎧 3-Month Subscription to an Audiobook Service", "points": 90},
-                {"item": "🛋️ VIP Lounge Access at National Library", "points": 120},
-                {"item": "🖋️ Personalized Engraved Fountain Pen", "points": 80},
-                {"item": "📅 Free Entry to a Literary Festival", "points": 110},
-            ]
-
             # Fetch user's points (assumed session state tracks points)
             user_points = st.session_state.get("user_points", 0)
 
@@ -178,63 +168,10 @@ else:
         elif tab == "Friends":
             st.header("👥 Find and Connect with Friends")
 
-            # Dummy Friend Data (Simulating a small database)
-            friend_data = [
-                {"name": "Alice", "preferences": ["Fiction", "Self-Help"], "status": "📗 Reading 'Atomic Habits' - Online"},
-                {"name": "Bob", "preferences": ["Technology", "Business"], "status": "📕 Last seen 2 hours ago"},
-                {"name": "Charlie", "preferences": ["Fantasy", "Science Fiction"], "status": "📗 Reading 'Dune' - Online"},
-                {"name": "David", "preferences": ["History", "Business"], "status": "📕 Last seen 10 minutes ago"},
-                {"name": "Emma", "preferences": ["Fiction", "Self-Help"], "status": "📗 Reading 'The Alchemist' - Online"},
-                {"name": "Frank", "preferences": ["Science", "Technology"], "status": "📗 Reading 'A Brief History of Time' - Online"},
-                {"name": "Grace", "preferences": ["Fiction", "Fantasy"], "status": "📕 Last seen 30 minutes ago"},
-                {"name": "Hannah", "preferences": ["Business", "Self-Help"], "status": "📗 Reading 'The Lean Startup' - Online"},
-                {"name": "Isaac", "preferences": ["History", "Science"], "status": "📕 Last seen 1 hour ago"},
-                {"name": "Jack", "preferences": ["Fiction", "Science Fiction"], "status": "📗 Reading '1984' - Online"},
-                {"name": "Katie", "preferences": ["Self-Help", "Fantasy"], "status": "📕 Last seen 5 hours ago"},
-                {"name": "Leo", "preferences": ["Business", "Finance"], "status": "📗 Reading 'The Psychology of Money' - Online"},
-                {"name": "Mia", "preferences": ["Technology", "Fiction"], "status": "📕 Last seen 3 hours ago"},
-                {"name": "Nathan", "preferences": ["Fantasy", "History"], "status": "📗 Reading 'The Hobbit' - Online"},
-                {"name": "Olivia", "preferences": ["Science", "Self-Help"], "status": "📗 Reading 'Thinking, Fast and Slow' - Online"},
-                {"name": "Paul", "preferences": ["Business", "Technology"], "status": "📕 Last seen 1 day ago"},
-                {"name": "Quinn", "preferences": ["Fiction", "Self-Help"], "status": "📕 Last seen 2 days ago"},
-                {"name": "Ryan", "preferences": ["Fantasy", "Science"], "status": "📗 Reading 'Harry Potter' - Online"},
-                {"name": "Sophia", "preferences": ["Finance", "Self-Help"], "status": "📕 Last seen 4 hours ago"},
-                {"name": "Tom", "preferences": ["Technology", "Business"], "status": "📗 Reading 'Zero to One' - Online"},
-                {"name": "Ursula", "preferences": ["History", "Fantasy"], "status": "📕 Last seen 6 hours ago"},
-                {"name": "Victor", "preferences": ["Science Fiction", "Business"], "status": "📗 Reading 'Dune' - Online"},
-                {"name": "Wendy", "preferences": ["Self-Help", "Finance"], "status": "📕 Last seen 12 hours ago"},
-                {"name": "Xavier", "preferences": ["Technology", "Science"], "status": "📗 Reading 'Deep Learning' - Online"},
-                {"name": "Yasmine", "preferences": ["Fantasy", "History"], "status": "📗 Reading 'The Chronicles of Narnia' - Online"},
-                {"name": "Zach", "preferences": ["Business", "Finance"], "status": "📕 Last seen 8 hours ago"},
-                {"name": "Aaron", "preferences": ["Fiction", "Science"], "status": "📕 Last seen 10 hours ago"},
-                {"name": "Bella", "preferences": ["Fantasy", "Self-Help"], "status": "📗 Reading 'The Subtle Art of Not Giving a F*ck' - Online"},
-                {"name": "Chris", "preferences": ["Technology", "Business"], "status": "📕 Last seen 1 day ago"},
-                {"name": "Daisy", "preferences": ["Science", "Fiction"], "status": "📗 Reading 'Sapiens' - Online"},
-                {"name": "Ethan", "preferences": ["Self-Help", "Finance"], "status": "📕 Last seen 3 hours ago"},
-                {"name": "Fiona", "preferences": ["Fantasy", "History"], "status": "📗 Reading 'The Lord of the Rings' - Online"},
-                {"name": "George", "preferences": ["Technology", "Business"], "status": "📕 Last seen 5 hours ago"},
-                {"name": "Hazel", "preferences": ["Science", "Self-Help"], "status": "📗 Reading 'The Power of Habit' - Online"},
-                {"name": "Ian", "preferences": ["History", "Business"], "status": "📕 Last seen 1 week ago"},
-                {"name": "Jasmine", "preferences": ["Fiction", "Fantasy"], "status": "📗 Reading 'Percy Jackson' - Online"},
-                {"name": "Kevin", "preferences": ["Science Fiction", "Technology"], "status": "📕 Last seen 6 hours ago"},
-                {"name": "Lena", "preferences": ["Fantasy", "Self-Help"], "status": "📗 Reading 'The Seven Habits of Highly Effective People' - Online"},
-                {"name": "Michael", "preferences": ["Business", "Finance"], "status": "📕 Last seen 9 hours ago"},
-                {"name": "Nina", "preferences": ["Technology", "Self-Help"], "status": "📗 Reading 'The Art of War' - Online"},
-                {"name": "Oscar", "preferences": ["Fiction", "Science"], "status": "📕 Last seen 12 hours ago"},
-                {"name": "Patricia", "preferences": ["Fantasy", "Business"], "status": "📗 Reading 'The Richest Man in Babylon' - Online"},
-                {"name": "Quincy", "preferences": ["Science", "History"], "status": "📕 Last seen 4 hours ago"},
-                {"name": "Robert", "preferences": ["Technology", "Self-Help"], "status": "📗 Reading 'Hooked' - Online"},
-                {"name": "Sarah", "preferences": ["Fiction", "Business"], "status": "📕 Last seen 8 hours ago"},
-                {"name": "Tyler", "preferences": ["Science Fiction", "Technology"], "status": "📗 Reading 'Neuromancer' - Online"},
-                {"name": "Uma", "preferences": ["Self-Help", "Finance"], "status": "📕 Last seen 2 days ago"},
-                {"name": "Vincent", "preferences": ["Fantasy", "Science Fiction"], "status": "📗 Reading 'The Name of the Wind' - Online"},
-                {"name": "Willow", "preferences": ["History", "Business"], "status": "📕 Last seen 10 hours ago"}
-            ]
-
-            st.subheader("")
+            # 🔍 Search for a Friend
             st.subheader("🔍 Search for a Friend")
             friend_search = st.text_input("Enter a friend's name:")
-            
+
             if friend_search:
                 matched_friend = next((f for f in friend_data if f["name"].lower() == friend_search.lower()), None)
                 if matched_friend:
@@ -242,34 +179,45 @@ else:
                     st.write(f"📖 **Currently:** {matched_friend['status']}")
                 else:
                     st.warning("⚠️ Friend not found.")
-            
-            # AI Matching - Get Top 5 Recommended Friends
-            user_preferences = st.session_state["preferences"] if st.session_state["preferences"] else []
-            matched_friends = sorted(friend_data, key=lambda f: len(set(f["preferences"]) & set(user_preferences)), reverse=True)[:5]
 
-            st.markdown("### 🎯 **Top 5 Recommended Friends**")
-            cols = st.columns(5, gap="medium")
+            # 🎯 AI Matching - Call API for Top 5 Recommended Friends
+            user_preferences = st.session_state.get("preferences", [])
+            matched_friends = []
 
-            for i, friend in enumerate(matched_friends):
-                with cols[i]:
-                    st.markdown(
-                        f"""
-                        <div style='text-align: center; padding: 15px; border-radius: 10px; background-color: #f8f9fa; width: 100%;'>
-                            <h4 style='text-align: center; font-size: 18px; margin-bottom: 5px;'>{friend['name']}</h4>
-                            <p style='text-align: center; font-size: 14px; color: #6c757d; margin-bottom: 5px;'>📌 {", ".join(friend['preferences'])}</p>
-                            <p style='text-align: center; font-size: 14px; font-weight: bold; color: green; margin-bottom: 10px;'>{friend['status']}</p>
-                        """,
-                        unsafe_allow_html=True
-                    )
+            if user_preferences:
+                response = requests.post("http://127.0.0.1:5000/recommend_friends", json={"preferences": user_preferences})
 
-                    if st.button(f"📚 Trade Book", key=f"trade_{i}"):
-                        st.success(f"✅ Trade request sent to {friend['name']}!")
+                if response.status_code == 200:
+                    matched_friends = response.json().get("matched_friends", [])
+                else:
+                    st.error("⚠️ Failed to fetch recommendations. Check backend.")
 
-                    if st.button(f"👋 Bump", key=f"bump_{i}"):
-                        st.success(f"💡 You just bumped {friend['name']}!")
-                        
-                    st.markdown("</div>", unsafe_allow_html=True)
-            st.subheader("")
+            st.markdown("### 🎯 **AI-Recommended Friends Based on Your Interests**")
+            if matched_friends:
+                cols = st.columns(min(5, len(matched_friends)), gap="medium")
+                for i, friend in enumerate(matched_friends):
+                    with cols[i]:
+                        st.markdown(
+                            f"""
+                            <div style='text-align: center; padding: 15px; border-radius: 10px; background-color: #f8f9fa; width: 100%;'>
+                                <h4 style='text-align: center; font-size: 18px; margin-bottom: 5px;'>{friend['name']}</h4>
+                                <p style='text-align: center; font-size: 14px; color: #6c757d; margin-bottom: 5px;'>📌 {", ".join(friend.get("preferences", []))}</p>
+                                <p style='text-align: center; font-size: 14px; font-weight: bold; color: green; margin-bottom: 10px;'>{friend['status']}</p>
+                            """,
+                            unsafe_allow_html=True
+                        )
+
+                        if st.button(f"📚 Trade Book", key=f"trade_{i}"):
+                            st.success(f"✅ Trade request sent to {friend['name']}!")
+
+                        if st.button(f"👋 Bump", key=f"bump_{i}"):
+                            st.success(f"💡 You just bumped {friend['name']}!")
+
+                        st.markdown("</div>", unsafe_allow_html=True)
+            else:
+                st.info("💡 No friend recommendations yet. Try updating your book preferences!")
+
+            # 🟢 Friend Activity - Who's Online?
             st.subheader("🟢 Friend Activity - Who's Online?")
             online_friends = [f for f in friend_data if "Online" in f["status"]]
             offline_friends = [f for f in friend_data if "Last seen" in f["status"]]
@@ -293,59 +241,6 @@ else:
                     st.warning("All your friends are currently online!")
         elif tab == "Study Groups":
             st.header("📚 Study Groups")
-
-            # Dummy friend group dataset
-            study_groups = [
-                {
-                    "group_name": "Sci-Fi Enthusiasts",
-                    "members": ["Alice", "Bob", "Charlie"],
-                    "book_sharing": [{"user": "Charlie", "book": "Dune"}],
-                    "discussion_topic": "Best Sci-Fi world-building in literature?",
-                    "active_status": "🔥 Active Now",
-                },
-                {
-                    "group_name": "Business Bookworms",
-                    "members": ["David", "Emma", "Frank"],
-                    "book_sharing": [{"user": "Emma", "book": "The Lean Startup"}],
-                    "discussion_topic": "Is 'Zero to One' better than 'The Lean Startup'?",
-                    "active_status": "💬 Ongoing Discussion",
-                },
-                {
-                    "group_name": "Fantasy Legends",
-                    "members": ["George", "Hannah", "Ian"],
-                    "book_sharing": [{"user": "Hannah", "book": "The Hobbit"}],
-                    "discussion_topic": "Which fantasy novel has the best magic system?",
-                    "active_status": "🟢 3 members online",
-                },
-                {
-                    "group_name": "Self-Help Squad",
-                    "members": ["Jack", "Kate", "Leo"],
-                    "book_sharing": [{"user": "Jack", "book": "Atomic Habits"}],
-                    "discussion_topic": "What's one self-help book that changed your life?",
-                    "active_status": "🔵 2 members reading",
-                },
-                {
-                    "group_name": "History Buffs",
-                    "members": ["Mike", "Nancy", "Olivia"],
-                    "book_sharing": [{"user": "Mike", "book": "Sapiens"}],
-                    "discussion_topic": "What’s the best book about ancient civilizations?",
-                    "active_status": "📖 Quiet, deep discussion",
-                },
-                {
-                    "group_name": "Tech Geeks",
-                    "members": ["Paul", "Quinn", "Rachel"],
-                    "book_sharing": [{"user": "Quinn", "book": "Deep Learning"}],
-                    "discussion_topic": "AI books vs online courses: Which is better?",
-                    "active_status": "⚡ Rapid fire conversation",
-                },
-                {
-                    "group_name": "Philosophy & Psychology",
-                    "members": ["Sarah", "Tom", "Uma"],
-                    "book_sharing": [{"user": "Sarah", "book": "Thinking, Fast and Slow"}],
-                    "discussion_topic": "Is human behavior more predictable than we think?",
-                    "active_status": "🤔 Deep thinking",
-                },
-            ]
 
             # Display Study Groups
             for group in study_groups:
@@ -411,14 +306,6 @@ else:
                 )
 
             # Styled Leaderboard Data
-            leaderboard_data = [
-                {"Rank": 1, "Username": "Alice", "Points": 720},
-                {"Rank": 2, "Username": "Bob", "Points": 650},
-                {"Rank": 3, "Username": "Charlie", "Points": 580},
-                {"Rank": 4, "Username": st.session_state["username"], "Points": user_points},
-                {"Rank": 5, "Username": "Eve", "Points": 410},
-            ]
-
             df_leaderboard = pd.DataFrame(leaderboard_data)
 
             # Leaderboard Section Title
@@ -457,28 +344,30 @@ else:
                 
                 if response.status_code == 200:
                     response_data = response.json()
-                    if "matched_books" in response_data and response_data["matched_books"]:
-                        recommendations = response_data["matched_books"]
-                        st.markdown("### 📚 Scott's Top Book Recommendations")
+                    recommendations = response_data.get("matched_books", [])  # ✅ Ensure key exists
+                else:
+                    recommendations = []
 
-                        cols = st.columns(5, gap="medium")  # Display in 5 equally spaced columns
+                if recommendations:
+                    st.markdown("### 📚 Scott's Top Book Recommendations")
+                    cols = st.columns(5, gap="medium")
 
-                        for i, book in enumerate(recommendations[:5]):  # Show top 5 recommendations
-                            with cols[i]:
-                                st.markdown(
-                                    f"""
-                                    <div style='text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f9fa; width: 100%;'>
-                                        <h4 style='text-align: center; font-size: 18px; margin-bottom: 5px;'>{book['title']}</h4>
-                                        <p style='text-align: center; font-size: 16px; font-weight: bold; color: green; margin-bottom: 5px;'>💲 {book['price']}</p>
-                                        <p style='text-align: center; font-size: 14px; color: #6c757d; margin-bottom: 10px;'>{book['description']}</p>
-                                    """,
-                                    unsafe_allow_html=True
-                                )
-                                if st.button(f"Buy {book['title']}", key=f"buy_chatbot_{i}"):
-                                    st.session_state["purchased_books"].add(book['title'])
-                                    st.success(f"✅ Purchased {book['title']}!")
-                                st.markdown("</div>", unsafe_allow_html=True)
-                    else:
-                        st.warning("⚠️ No recommendations found. Try providing more details.")
-                
+                    for i, book in enumerate(recommendations[:5]):
+                        with cols[i]:
+                            st.markdown(
+                                f"""
+                                <div style='text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f9fa; width: 100%;'>
+                                    <h4 style='text-align: center; font-size: 18px; margin-bottom: 5px;'>{book.get('title', 'Unknown Title')}</h4>
+                                    <p style='text-align: center; font-size: 16px; font-weight: bold; color: green; margin-bottom: 5px;'>💲 {book.get('price', 'N/A')}</p>
+                                    <p style='text-align: center; font-size: 14px; color: #6c757d; margin-bottom: 10px;'>{book.get('description', 'No description available')}</p>
+                                """,
+                                unsafe_allow_html=True
+                            )
+                            if st.button(f"Buy {book['title']}", key=f"buy_chatbot_{i}"):
+                                st.session_state["purchased_books"].add(book['title'])
+                                st.success(f"✅ Purchased {book['title']}!")
+                            st.markdown("</div>", unsafe_allow_html=True)
+                else:
+                    st.warning("⚠️ No recommendations found. Try providing more details.")
+
                 st.session_state["chat_history"] = []  # Reset chat after getting recommendations
